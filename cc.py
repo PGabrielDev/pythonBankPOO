@@ -1,7 +1,11 @@
-from Conta import Conta
+from Conta import  Conta
 
 
-class ContaPoupanca(Conta):
+class ContaCorrente(Conta):
+
+    def __init__(self,agencia, numero, saldo=0, limite=400):
+        super().__init__(agencia,numero,saldo)
+        self.limite = limite
 
     def sacar(self, valor):
         if not self._validacao(valor):
@@ -13,8 +17,7 @@ class ContaPoupanca(Conta):
 
 
     def __is_saque_negativo(self, valor):
-        if (self.saldo - valor) < 0:
-            print("Saldo insuficiente para realizar o saque")
+        if (self.saldo - valor) < self.limite * -1:
+            print("Saldo insuficiente para realizar o saldo")
             return False
         return True
-
